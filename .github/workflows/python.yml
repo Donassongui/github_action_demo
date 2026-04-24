@@ -1,0 +1,28 @@
+name: Python CI
+
+on: 
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Cloner repo
+        uses: actions/checkout@v4
+
+      - name: Installer python
+        uses: action/setup-python@v5
+        with:
+          pyton_version : "3.11"
+
+      - name: Installer les dépendances
+        run: |
+          pyton -m pip install --upgrade pip
+          pip install -r requirement.txt
+      - name : lancer tests
+        uses: pytest
+          
